@@ -26,7 +26,6 @@ client.on("message", (message) => {
     client.toxicity.classify([message.content]).then((Y) => {
       let flags = Y.filter((flag) => flag.results[0].match).map((flag) => flag.label);
       let sentiment = client.sentiment.predict(message.content);
-      console.log(sentiment);
       userc.note(message.author.id, flags, sentiment);
       if (flags.length == 0) return;
       message.reply(`Wow, calm down... ` + flags.join());

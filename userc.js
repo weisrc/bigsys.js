@@ -38,12 +38,11 @@ const update = (id, score, n_messages, n_warnings) => {
 };
 
 const inc = (id, labels, sentiment) => {
-  let $inc = { message: 1, score: increments.message, sentiment: sentiment - 0.5 };
+  let $inc = { message: 1, score: increments.message, sentiment };
   for (let label of labels) {
     $inc[label] = 1;
     $inc.score += increments[label];
   }
-  console.log($inc);
   return User.updateOne({ id }, { $inc });
 };
 
